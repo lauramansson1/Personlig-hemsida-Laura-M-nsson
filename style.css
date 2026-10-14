@@ -1,0 +1,522 @@
+/* ==========================================================================
+   1 · Box-modellen: bredden gäller hela lådan och mjuk scroll
+   ========================================================================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* ==========================================================================
+   2 · Varumärket som variabler (Ljust läge)
+   Inspirerat av puderrosa toner, elegans och värme
+   ========================================================================== */
+:root {
+    /* Färger: Varm, lugn, modern och personlig färgskala */
+    --text: #2c1d22;             /* Varm espressobrun – hög kontrast (>13:1) och mjukare än kolsvart */
+    --yta: #fff7f8;              /* Varm, mjukt pudrad vit bas för en inbjudande känsla */
+    --yta-2: #f8ebeb;            /* Mjuk blush/puderrosa ton för kort, header och sektioner */
+    --kant: #ebd5dc;             /* Diskret, mjuk linjefärg som ramar in element elegant */
+    --primar: #231418;           /* Mörk plommonbrun för rubriker, logotyp och primära detaljer */
+    --accent: #c4476a;           /* Varm rosenaccent för knappar som drar blicken till sig */
+    --accent-hover: #ad3757;     /* Lite djupare ton vid hovring över knappen */
+    --knapptext: #ffffff;        /* Vit text på accentknappen med godkänd kontrast (>5:1) */
+
+    /* Typsnitt från Google Fonts */
+    --font-rubrik: "Playfair Display", Georgia, serif;
+    --font-brod: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+
+    /* Avstånd och former */
+    --luft: 1rem;
+    --radie: 20px;               /* Mjukt rundade hörn på kort och containrar */
+    --radie-piller: 999px;       /* Helt rundade former för knappar och taggar */
+    --skugga: 0 10px 30px rgba(135, 60, 80, 0.08); /* Varm och mjuk skugga */
+    --skugga-hover: 0 14px 36px rgba(135, 60, 80, 0.14);
+}
+
+/* ==========================================================================
+   3 · Grundstil för text, rubriker och länkar
+   ========================================================================== */
+body {
+    margin: 0;
+    font-family: var(--font-brod);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text);
+    background-color: var(--yta);
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-rubrik);
+    line-height: 1.25;
+    color: var(--primar);
+    margin: 0;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 2.35rem;
+    letter-spacing: -0.02em;
+    margin-bottom: calc(var(--luft) * 0.5);
+}
+
+h2 {
+    font-size: 1.85rem;
+    letter-spacing: -0.01em;
+    margin-bottom: calc(var(--luft) * 1.25);
+    position: relative;
+    display: inline-block;
+}
+
+/* En mjuk dekorativ understrykning under sektionsrubriker för en personlig touch */
+h2::after {
+    content: "";
+    display: block;
+    width: 48px;
+    height: 3px;
+    background-color: var(--accent);
+    border-radius: var(--radie-piller);
+    margin-top: 0.4rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+p {
+    max-width: 65ch;
+    margin: 0 0 var(--luft) 0;
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+a {
+    color: var(--primar);
+    text-underline-offset: 3px;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--accent);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ==========================================================================
+   4 · Sidhuvud och meny
+   ========================================================================== */
+.sidhuvud {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--luft);
+    padding: calc(var(--luft) * 1.1) calc(var(--luft) * 1.5);
+    background-color: var(--yta);
+    border-bottom: 1px solid var(--kant);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.logotyp a {
+    font-family: var(--font-rubrik);
+    font-size: 1.45rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    color: var(--primar);
+    transition: color 0.2s ease;
+}
+
+.logotyp a:hover {
+    color: var(--accent);
+}
+
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: calc(var(--luft) * 0.5);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    font-family: var(--font-brod);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    padding: 0.45rem 0.9rem;
+    border-radius: var(--radie-piller);
+    color: var(--text);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+nav a:hover {
+    background-color: var(--yta-2);
+    color: var(--primar);
+}
+
+/* ==========================================================================
+   5 · Hero: Bild och introduktion där uppe
+   ========================================================================== */
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: calc(var(--luft) * 2);
+    padding: calc(var(--luft) * 3) 0 calc(var(--luft) * 3.5);
+    border-bottom: 1px solid var(--kant);
+}
+
+.hero-bild-wrapper {
+    flex-shrink: 0;
+    position: relative;
+}
+
+/* Mjuk inramning bakom profilbilden */
+.hero-bild-wrapper::before {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--yta-2), var(--kant));
+    z-index: -1;
+}
+
+.hero-bild {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid var(--yta);
+    box-shadow: var(--skugga);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-bild:hover {
+    transform: scale(1.02);
+    box-shadow: var(--skugga-hover);
+}
+
+.hero-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(var(--luft) * 0.75);
+}
+
+.roll {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--primar);
+    background-color: var(--yta-2);
+    border: 1px solid var(--kant);
+    padding: 0.4rem 1.1rem;
+    border-radius: var(--radie-piller);
+    margin: 0;
+}
+
+.hero-pitch {
+    font-size: 1.15rem;
+    line-height: 1.65;
+    color: var(--text);
+    max-width: 54ch;
+    margin: calc(var(--luft) * 0.5) 0 calc(var(--luft) * 0.75);
+}
+
+.hero-knappar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: calc(var(--luft) * 0.85);
+    margin-top: calc(var(--luft) * 0.5);
+}
+
+/* ==========================================================================
+   6 · Innehållsytan och Om mig
+   ========================================================================== */
+main {
+    max-width: 68rem;
+    margin: 0 auto;
+    padding: 0 calc(var(--luft) * 1.5);
+}
+
+section {
+    padding: calc(var(--luft) * 3.5) 0;
+    border-bottom: 1px solid var(--kant);
+}
+
+section:last-of-type {
+    border-bottom: none;
+}
+
+.om-text {
+    background-color: var(--yta-2);
+    border: 1px solid var(--kant);
+    border-radius: var(--radie);
+    padding: calc(var(--luft) * 2);
+    box-shadow: var(--skugga);
+}
+
+.om-text p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    max-width: 70ch;
+}
+
+/* ==========================================================================
+   7 · Kort i ett rutnät (Intressen och Erfarenheter)
+   ========================================================================== */
+.rutnat {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: calc(var(--luft) * 1.5);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.kort {
+    background-color: var(--yta-2);
+    padding: calc(var(--luft) * 1.75);
+    border: 1px solid var(--kant);
+    border-radius: var(--radie);
+    box-shadow: var(--skugga);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.kort:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--skugga-hover);
+    border-color: var(--accent);
+}
+
+.kort h3 {
+    margin-bottom: calc(var(--luft) * 0.5);
+    color: var(--primar);
+}
+
+.erfarenhet-info {
+    margin-bottom: 0.25rem;
+    color: var(--primar);
+    font-weight: 600;
+}
+
+.erfarenhet-datum {
+    font-size: 0.88rem;
+    color: var(--text);
+    opacity: 0.8;
+    margin-bottom: var(--luft);
+}
+
+.kort ul {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.kort li {
+    margin-bottom: 0.45rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.kort li:last-child {
+    margin-bottom: 0;
+}
+
+/* ==========================================================================
+   8 · Knappar, formulär och tillgänglighet
+   ========================================================================== */
+.knapp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.6rem;
+    min-height: 48px;            /* Rymlig klickyta för touch på mobil */
+    background-color: var(--accent);
+    color: var(--knapptext);
+    font-family: var(--font-brod);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border-radius: var(--radie-piller);
+    border: 2px solid var(--accent);
+    box-shadow: 0 4px 14px rgba(196, 71, 106, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.knapp:hover {
+    transform: translateY(-2px);
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+    box-shadow: 0 6px 18px rgba(196, 71, 106, 0.35);
+    color: var(--knapptext);
+    text-decoration: none;
+}
+
+.knapp-sekundar {
+    background-color: transparent;
+    color: var(--primar);
+    border: 2px solid var(--primar);
+    box-shadow: none;
+}
+
+.knapp-sekundar:hover {
+    background-color: var(--yta-2);
+    color: var(--primar);
+    border-color: var(--primar);
+    box-shadow: var(--skugga);
+}
+
+/* Knappen för att byta ljust/mörkt läge */
+button#tema,
+button {
+    font-family: var(--font-brod);
+    padding: 0.6rem 1.2rem;
+    min-height: 44px;
+    color: var(--primar);
+    background-color: var(--yta);
+    border: 1px solid var(--kant);
+    border-radius: var(--radie-piller);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+button#tema:hover,
+button:hover {
+    background-color: var(--yta-2);
+    border-color: var(--accent);
+}
+
+/* Tydlig fokusram för tangentbordsnavigering (tillgänglighet) */
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* Kontakt-sektion */
+.kontakt-sektion {
+    text-align: center;
+    background-color: var(--yta-2);
+    border: 1px solid var(--kant);
+    border-radius: var(--radie);
+    padding: calc(var(--luft) * 3) calc(var(--luft) * 1.5);
+    box-shadow: var(--skugga);
+}
+
+.kontakt-sektion h2::after {
+    margin: 0.4rem auto 0 auto;
+}
+
+.kontakt-sektion p {
+    margin: 0 auto var(--luft) auto;
+}
+
+.kontakt-lankar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--luft);
+    margin-top: calc(var(--luft) * 1.5);
+}
+
+/* Sidfot */
+footer {
+    padding: calc(var(--luft) * 2.5);
+    text-align: center;
+    background-color: var(--yta-2);
+    border-top: 1px solid var(--kant);
+}
+
+footer p {
+    margin: 0 auto;
+    font-size: 0.9rem;
+    color: var(--text);
+    opacity: 0.85;
+}
+
+/* ==========================================================================
+   9 · Större skärmar (responsivitet för surfplatta och dator)
+   ========================================================================== */
+@media (min-width: 48rem) {
+    .sidhuvud {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: calc(var(--luft) * 1.25) calc(var(--luft) * 3);
+    }
+
+    .hero {
+        flex-direction: row;
+        text-align: left;
+        align-items: center;
+        justify-content: space-between;
+        gap: calc(var(--luft) * 3.5);
+        padding: calc(var(--luft) * 4) 0 calc(var(--luft) * 4.5);
+    }
+
+    .hero-bild {
+        width: 290px;
+        height: 290px;
+    }
+
+    .hero-text {
+        align-items: flex-start;
+    }
+
+    .hero-knappar {
+        justify-content: flex-start;
+    }
+
+    h1 {
+        font-size: 2.85rem;
+    }
+
+    h2 {
+        font-size: 2.15rem;
+    }
+}
+
+/* ==========================================================================
+   10 · Mörkt läge: nya harmoniska och varma färger när body har klassen morkt
+   ========================================================================== */
+body.morkt {
+    --text: #f5ebef;             /* Mjukt ljust puder för hög kontrast (>13:1) och skonsam läsning */
+    --yta: #1c1316;              /* Djup och varm plommonsvart ton istället för kallblå */
+    --yta-2: #271b20;            /* Något ljusare ton för kort, header och sektioner */
+    --kant: #442f36;             /* Mjuk mörk kantlinje */
+    --primar: #ffd3de;           /* Ljus och varm puderrosa för rubriker och logotyp (>11:1) */
+    --accent: #f296ad;           /* Pigg och varm rosenrosa för knappar */
+    --accent-hover: #faadc0;     /* Ännu lite ljusare vid hovring */
+    --knapptext: #1c1316;        /* Mörk text på rosenknapp med utmärkt kontrast (>8:1) */
+    --skugga: 0 10px 30px rgba(0, 0, 0, 0.45);
+    --skugga-hover: 0 14px 36px rgba(0, 0, 0, 0.65);
+}
