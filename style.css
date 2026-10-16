@@ -556,6 +556,12 @@ body.morkt .formular-grupp textarea:focus {
     min-width: 220px;
 }
 
+.formular-knapp:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
+}
+
 .formular-status {
     padding: 1rem 1.25rem;
     border-radius: 12px;
@@ -568,8 +574,20 @@ body.morkt .formular-grupp textarea:focus {
     animation: formularTonaIn 0.3s ease;
 }
 
+.formular-status.fel {
+    background-color: rgba(220, 53, 69, 0.1);
+    border-color: #dc3545;
+    color: #a71d2a;
+}
+
 body.morkt .formular-status {
     background-color: rgba(242, 150, 173, 0.15);
+}
+
+body.morkt .formular-status.fel {
+    background-color: rgba(255, 107, 107, 0.15);
+    border-color: #ff6b6b;
+    color: #ffb4b4;
 }
 
 @keyframes formularTonaIn {
