@@ -9,6 +9,9 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 6.5rem;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 /* ==========================================================================
@@ -49,6 +52,7 @@ body {
     color: var(--text);
     background-color: var(--yta);
     transition: background-color 0.25s ease, color 0.25s ease;
+    overflow-x: hidden;
 }
 
 h1,
@@ -62,17 +66,19 @@ h3 {
 }
 
 h1 {
-    font-size: 2.35rem;
+    font-size: clamp(2rem, 7vw, 2.35rem);
     letter-spacing: -0.02em;
     margin-bottom: calc(var(--luft) * 0.5);
+    overflow-wrap: break-word;
 }
 
 h2 {
-    font-size: 1.85rem;
+    font-size: clamp(1.55rem, 5vw, 1.85rem);
     letter-spacing: -0.01em;
     margin-bottom: calc(var(--luft) * 1.25);
     position: relative;
     display: inline-block;
+    overflow-wrap: break-word;
 }
 
 /* En mjuk dekorativ understrykning under sektionsrubriker för en personlig touch */
@@ -94,6 +100,7 @@ h3 {
 p {
     max-width: 65ch;
     margin: 0 0 var(--luft) 0;
+    overflow-wrap: break-word;
 }
 
 p:last-child {
@@ -203,8 +210,9 @@ nav a:hover {
 }
 
 .hero-bild {
-    width: 220px;
-    height: 220px;
+    width: min(220px, 60vw);
+    height: min(220px, 60vw);
+    aspect-ratio: 1;
     object-fit: cover;
     border-radius: 50%;
     border: 4px solid var(--yta);
@@ -287,12 +295,36 @@ section:last-of-type {
     max-width: 70ch;
 }
 
+.kunskaper-intro {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: calc(var(--luft) * 1.5);
+    max-width: 70ch;
+}
+
+.kunskaper-outro {
+    margin-top: calc(var(--luft) * 2);
+    padding: calc(var(--luft) * 1.5) calc(var(--luft) * 1.75);
+    background-color: var(--yta-2);
+    border: 1px solid var(--kant);
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radie);
+    box-shadow: var(--skugga);
+}
+
+.kunskaper-outro p {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    max-width: 70ch;
+}
+
 /* ==========================================================================
-   7 · Kort i ett rutnät (Intressen och Erfarenheter)
+   7 · Kort i ett rutnät (Kunskaper, Intressen och Erfarenheter)
    ========================================================================== */
 .rutnat {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
     gap: calc(var(--luft) * 1.5);
     list-style: none;
     padding: 0;
@@ -358,6 +390,9 @@ section:last-of-type {
     justify-content: center;
     padding: 0.85rem 1.6rem;
     min-height: 48px;            /* Rymlig klickyta för touch på mobil */
+    max-width: 100%;
+    word-break: break-word;
+    text-align: center;
     background-color: var(--accent);
     color: var(--knapptext);
     font-family: var(--font-brod);
@@ -422,7 +457,7 @@ button:focus-visible {
     outline-offset: 3px;
 }
 
-/* Kontakt-sektion */
+/* Kontakt-sektion och formulär */
 .kontakt-sektion {
     text-align: center;
     background-color: var(--yta-2);
@@ -436,8 +471,129 @@ button:focus-visible {
     margin: 0.4rem auto 0 auto;
 }
 
-.kontakt-sektion p {
-    margin: 0 auto var(--luft) auto;
+.kontakt-sektion .kontakt-intro {
+    margin: 0 auto calc(var(--luft) * 1.75) auto;
+    max-width: 60ch;
+}
+
+.kontakt-formular {
+    max-width: 580px;
+    margin: 0 auto;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--luft) * 1.25);
+}
+
+.formular-rad {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: calc(var(--luft) * 1.25);
+}
+
+.formular-grupp {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.formular-grupp label {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--primar);
+}
+
+.obligatorisk {
+    color: var(--accent);
+}
+
+.formular-grupp input,
+.formular-grupp textarea {
+    width: 100%;
+    font-family: var(--font-brod);
+    font-size: 1rem;
+    color: var(--text);
+    background-color: var(--yta);
+    border: 1.5px solid var(--kant);
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.formular-grupp input::placeholder,
+.formular-grupp textarea::placeholder {
+    color: var(--text);
+    opacity: 0.55;
+}
+
+.formular-grupp input:hover,
+.formular-grupp textarea:hover {
+    border-color: var(--accent);
+}
+
+.formular-grupp input:focus,
+.formular-grupp textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(196, 71, 106, 0.2);
+}
+
+body.morkt .formular-grupp input:focus,
+body.morkt .formular-grupp textarea:focus {
+    box-shadow: 0 0 0 3px rgba(242, 150, 173, 0.25);
+}
+
+.formular-grupp textarea {
+    resize: vertical;
+    min-height: 130px;
+    line-height: 1.6;
+}
+
+.formular-knapp {
+    align-self: center;
+    cursor: pointer;
+    min-width: 220px;
+}
+
+.formular-status {
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    text-align: center;
+    background-color: rgba(196, 71, 106, 0.1);
+    border: 1px solid var(--accent);
+    color: var(--primar);
+    animation: formularTonaIn 0.3s ease;
+}
+
+body.morkt .formular-status {
+    background-color: rgba(242, 150, 173, 0.15);
+}
+
+@keyframes formularTonaIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.kontakt-direkt {
+    margin-top: calc(var(--luft) * 2.5);
+    padding-top: calc(var(--luft) * 1.75);
+    border-top: 1px dashed var(--kant);
+}
+
+.kontakt-direkt-text {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--primar);
+    margin: 0 auto calc(var(--luft) * 0.75) auto;
 }
 
 .kontakt-lankar {
@@ -445,7 +601,7 @@ button:focus-visible {
     flex-wrap: wrap;
     justify-content: center;
     gap: var(--luft);
-    margin-top: calc(var(--luft) * 1.5);
+    margin-top: var(--luft);
 }
 
 /* Sidfot */
@@ -464,9 +620,81 @@ footer p {
 }
 
 /* ==========================================================================
-   9 · Större skärmar (responsivitet för surfplatta och dator)
+   9 · Mobilanpassning (skärmar under 768px / 48rem)
+   Behåller exakt samma utseende och identitet, men optimerar marginaler och touch
+   ========================================================================== */
+@media (max-width: 47.99rem) {
+    main {
+        padding: 0 var(--luft);
+    }
+
+    section {
+        padding: calc(var(--luft) * 2.5) 0;
+    }
+
+    .sidhuvud {
+        padding: 0.85rem var(--luft);
+        gap: 0.65rem;
+    }
+
+    nav ul {
+        gap: 0.35rem;
+    }
+
+    nav a {
+        font-size: 0.88rem;
+        padding: 0.35rem 0.65rem;
+    }
+
+    button#tema {
+        padding: 0.45rem 1rem;
+        font-size: 0.82rem;
+        min-height: 40px;
+    }
+
+    .hero {
+        gap: calc(var(--luft) * 1.5);
+        padding: calc(var(--luft) * 2.5) 0 calc(var(--luft) * 3);
+    }
+
+    .hero-pitch {
+        font-size: 1.05rem;
+    }
+
+    .rutnat {
+        gap: var(--luft);
+    }
+
+    .kort,
+    .om-text,
+    .kunskaper-outro,
+    .kontakt-sektion {
+        padding: calc(var(--luft) * 1.25);
+    }
+
+    .kontakt-lankar .knapp {
+        font-size: 0.9rem;
+        padding: 0.8rem 1.15rem;
+    }
+
+    .formular-rad {
+        grid-template-columns: 1fr;
+        gap: var(--luft);
+    }
+
+    .formular-knapp {
+        width: 100%;
+    }
+}
+
+/* ==========================================================================
+   10 · Större skärmar (responsivitet för surfplatta och dator)
    ========================================================================== */
 @media (min-width: 48rem) {
+    html {
+        scroll-padding-top: 5rem;
+    }
+
     .sidhuvud {
         flex-direction: row;
         justify-content: space-between;
@@ -505,8 +733,13 @@ footer p {
     }
 }
 
+/* Aktiva touch-interaktioner */
+.knapp:active {
+    transform: scale(0.98);
+}
+
 /* ==========================================================================
-   10 · Mörkt läge: nya harmoniska och varma färger när body har klassen morkt
+   11 · Mörkt läge: nya harmoniska och varma färger när body har klassen morkt
    ========================================================================== */
 body.morkt {
     --text: #f5ebef;             /* Mjukt ljust puder för hög kontrast (>13:1) och skonsam läsning */

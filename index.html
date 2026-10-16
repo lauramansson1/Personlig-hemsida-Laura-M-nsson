@@ -15,9 +15,23 @@
     rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script defer src="script.js"></script>
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-W8QXCLDM');</script>
+  <!-- End Google Tag Manager -->
 </head>
 
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8QXCLDM" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
   <header class="sidhuvud">
     <div class="logotyp">
       <a href="#hero">Laura Månsson</a>
@@ -25,6 +39,7 @@
     <nav aria-label="Huvudmeny">
       <ul>
         <li><a href="#om">Om mig</a></li>
+        <li><a href="#kunskaper">Mina kunskaper</a></li>
         <li><a href="#intressen">Mina intressen</a></li>
         <li><a href="#erfarenheter">Erfarenheter</a></li>
         <li><a href="#kontakt">Kontakt</a></li>
@@ -42,12 +57,12 @@
         <p class="roll">Digital Marketing Specialist · Göteborg</p>
         <h1>Laura Månsson</h1>
         <p class="hero-pitch">
-          Jag brinner för att hjälpa små företag att synas och locka kunder online. Ofta är det en eller flera av dessa
-          delar som gör skillnaden: sociala medier, SEO eller e-postmarknadsföring.
+          Jag brinner för att hjälpa små företag att synas och locka kunder online.
         </p>
         <div class="hero-knappar">
           <a class="knapp" href="mailto:Lauramansson1@gmail.com">Mejla mig här</a>
-          <a class="knapp knapp-sekundar" href="https://www.linkedin.com/" target="_blank" rel="noopener">Laura på
+          <a class="knapp knapp-sekundar" href="https://www.linkedin.com/in/laura-m%C3%A5nsson-919b18428/ "
+            target="_blank" rel="noopener">Min
             LinkedIn</a>
         </div>
       </div>
@@ -68,6 +83,50 @@
         </p>
         <p>Jag är nyfiken, engagerad och gillar att ta ansvar. Jag trivs bäst när jag får vara delaktig, testa nya idéer
           och samtidigt utvecklas längs vägen.</p>
+      </div>
+    </section>
+
+    <section id="kunskaper">
+      <h2>Mina kunskaper</h2>
+      <p class="kunskaper-intro">
+        När jag avslutar utbildningen 2028 kommer jag bland annat att ha läst och arbetat med följande områden:
+      </p>
+      <div class="rutnat">
+        <article class="kort">
+          <h3>Digital marknadsföring</h3>
+          <p>SEO, SEM, Paid Media, content- och influencer marketing samt Programmatic Advertising.</p>
+        </article>
+
+        <article class="kort">
+          <h3>Strategi och kampanjhantering</h3>
+          <p>Digital strategi, kampanjplanering och budgetering för digital marknadsföring.</p>
+        </article>
+
+        <article class="kort">
+          <h3>Content och kommunikation</h3>
+          <p>Innehållsskapande, storytelling, pitch och presentation.</p>
+        </article>
+
+        <article class="kort">
+          <h3>Analys och teknik</h3>
+          <p>Tracking, digital analys, AI och tech.</p>
+        </article>
+
+        <article class="kort">
+          <h3>Marketing automation</h3>
+          <p>Inbound marketing och marketing automation.</p>
+        </article>
+
+        <article class="kort">
+          <h3>Juridik</h3>
+          <p>Juridik för digitala marknadsförare.</p>
+        </article>
+      </div>
+      <div class="kunskaper-outro">
+        <p>
+          Utbildningen ger mig en bred grund inom digital marknadsföring och möjlighet att utveckla mina kunskaper genom
+          praktiskt arbete, examensarbete och LIA.
+        </p>
       </div>
     </section>
 
@@ -141,12 +200,47 @@
     <section id="kontakt">
       <div class="kontakt-sektion">
         <h2>Kontakt</h2>
-        <p>Vill du veta mer? Mejla mig eller hör av dig på LinkedIn.</p>
-        <div class="kontakt-lankar">
-          <a class="knapp" href="mailto:Lauramansson1@gmail.com">Lauramansson1@gmail.com</a>
-          <a class="knapp knapp-sekundar" href="https://www.linkedin.com/in/laura-m%C3%A5nsson-79827228a/"
-            target="_blank" rel="noopener">Laura Månsson
-            på LinkedIn</a>
+        <p class="kontakt-intro">
+          Har du en fråga, en idé eller söker du en driven praktikant eller kollega inom digital marknadsföring?
+          Fyll i formuläret nedan så återkommer jag så snart jag kan!
+        </p>
+
+        <form id="kontakt-formular" class="kontakt-formular">
+          <div class="formular-rad">
+            <div class="formular-grupp">
+              <label for="namn">Ditt namn <span class="obligatorisk" aria-hidden="true">*</span></label>
+              <input type="text" id="namn" name="namn" placeholder="För- och efternamn" autocomplete="name" required>
+            </div>
+            <div class="formular-grupp">
+              <label for="epost">E-postadress <span class="obligatorisk" aria-hidden="true">*</span></label>
+              <input type="email" id="epost" name="epost" placeholder="din.epost@exempel.se" autocomplete="email"
+                required>
+            </div>
+          </div>
+
+          <div class="formular-grupp">
+            <label for="amne">Ämne</label>
+            <input type="text" id="amne" name="amne" placeholder="T.ex. LIA-praktik, samarbete eller projekt">
+          </div>
+
+          <div class="formular-grupp">
+            <label for="meddelande">Meddelande <span class="obligatorisk" aria-hidden="true">*</span></label>
+            <textarea id="meddelande" name="meddelande" rows="5" placeholder="Skriv ditt meddelande här..."
+              required></textarea>
+          </div>
+
+          <div id="formular-status" class="formular-status" role="status" aria-live="polite" hidden></div>
+
+          <button type="submit" class="knapp formular-knapp">Skicka meddelande</button>
+        </form>
+
+        <div class="kontakt-direkt">
+          <p class="kontakt-direkt-text">Föredrar du att ta kontakt direkt?</p>
+          <div class="kontakt-lankar">
+            <a class="knapp knapp-sekundar" href="mailto:Lauramansson1@gmail.com">Lauramansson1@gmail.com</a>
+            <a class="knapp knapp-sekundar" href="https://www.linkedin.com/in/laura-m%C3%A5nsson-919b18428/ "
+              target="_blank" rel="noopener">Laura Månsson på LinkedIn</a>
+          </div>
         </div>
       </div>
     </section>
